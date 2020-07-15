@@ -1,1 +1,2 @@
-worker: node index.js
+web: echo "Lmao"
+worker: npm start
