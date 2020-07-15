@@ -9,7 +9,7 @@ let bot = new Eris(token, {
 
 bot.prefix = prefix;
 
-let files = fs.readdirSync('./commands/');
+let files = fs.readdirSync('./Commands/');
 
 // Ready Event
 bot.on('ready', () => {
