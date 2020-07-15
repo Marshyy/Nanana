@@ -1,7 +1,7 @@
 const Eris = require('eris');
 const fs = require('fs');
-const token = process.env.TOKEN;
-const prefix = process.env.PREFIX;
+const token = "Insert Your Token Here";
+const prefix = "Insert Your Prefix Here";
 
 let bot = new Eris(token, {
     disableEveryone: true
