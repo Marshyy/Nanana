@@ -76,7 +76,7 @@ function help(msg, bot) {
         }
 
         for(i=0;i<files.length;i++) {
-            let c = require(`../commands/${files[i]}`);
+            let c = require(`../Commands/${files[i]}`);
             if (c.help) {
                 data.embed.fields.push({ "name": charup(files[i].slice(0, -3)), "value": c.help , "inline": true});
             }
