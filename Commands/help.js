@@ -1,6 +1,6 @@
 function help(msg, bot) {
     const fs = require('fs');
-    let files = fs.readdirSync('./commands/');
+    let files = fs.readdirSync('./Commands/');
     let prefix = bot.prefix;
     msg.content = msg.content.toLowerCase().split(' ').slice(1).join(' ');
 
@@ -13,7 +13,7 @@ function help(msg, bot) {
         let commands = [];
 
         for(i=0;i<files.length;i++) {
-            let c = require(`../commands/${files[i]}`);
+            let c = require(`../Commands/${files[i]}`);
             commands.push([files[i].slice(0, -3), files[i]]);
             if(c.aliases) {
                 for(j=0;j<c.aliases.length;j++) {
@@ -29,7 +29,7 @@ function help(msg, bot) {
         if(i==commands.length) {
             return msg.channel.createMessage("Command not found (Might be a Typo on your side)");
         } else {
-            let c = require(`../commands/${commands[i][1]}`);
+            let c = require(`../Commands/${commands[i][1]}`);
 
             if (!c.usage && !c.help) return msg.channel.createMessage("ERROR\nContact the Bot Owner (user id: 309311003303215108) with a Screenshot");
 
@@ -76,7 +76,7 @@ function help(msg, bot) {
         }
 
         for(i=0;i<files.length;i++) {
-            let c = require(`../commands/${files[i]}`);
+            let c = require(`../Commands/${files[i]}`);
             if (c.help) {
                 data.embed.fields.push({ "name": charup(files[i].slice(0, -3)), "value": c.help , "inline": true});
             }
