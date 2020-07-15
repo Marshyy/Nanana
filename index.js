@@ -22,7 +22,7 @@ let i, j;
 let commands = [];
     
 for(i=0;i<files.length;i++) {
-  let c = require(`./commands/${files[i]}`);
+  let c = require(`./Commands/${files[i]}`);
     commands.push([files[i].slice(0, -3), files[i]]);
       if(c.aliases) {
           for(j=0;j<c.aliases.length;j++) {
@@ -43,7 +43,7 @@ bot.on('messageCreate', msg => {
 
     for(i=0;i<commands.length;i++) {
       if (c[0].toString() == commands[i][0]) {
-        let command = require(`./commands/${commands[i][1]}`);
+        let command = require(`./Commands/${commands[i][1]}`);
         command.func(msg, bot);
 
         return;
