@@ -1,10 +1,10 @@
 const Eris = require('eris');
 const fs = require('fs');
-const token = "Insert Your Token Here";
-const prefix = "Insert Your Prefix Here";
+const token = "Insert Token Here";
+const prefix = "Insert Prefix Here";
 
 let bot = new Eris(token, {
-    disableEveryone: true
+  disableEveryone: true
 });
 
 bot.prefix = prefix;
@@ -15,41 +15,40 @@ let files = fs.readdirSync('./Commands/');
 bot.on('ready', () => {
   let ready = require("./ready/ready.js");
   ready(bot);
+  bot.hand = require("./ready/handling.js");
+  bot.emoji = require("./ready/emoji.js");
 })
 
-// Aliases Loading
+// Aliases and Commands Loading
 let i, j;
-let commands = [];
-    
-for(i=0;i<files.length;i++) {
+let commands = {}; // Object Created to Store Name And Aliases And their respective funtions
+
+for (i = 0; i < files.length; i++) {
   let c = require(`./Commands/${files[i]}`);
-    commands.push([files[i].slice(0, -3), files[i]]);
-      if(c.aliases) {
-          for(j=0;j<c.aliases.length;j++) {
-          commands.push([c.aliases[j], files[i]]);
-        }
+
+  commands[files[i].slice(0, -3).toLowerCase()] = c.func;
+
+  if (c.aliases) {
+    for (j = 0; j < c.aliases.length; j++) {
+      commands[c.aliases[j].toLowerCase()] = c.func;
     }
+  }
 }
 
 // Message Create Event, Handling Event 
 bot.on('messageCreate', msg => {
-  // This is so detrimental, should change I guess
-  let handling = require("./ready/handling.js");
-  let emoji = require("./ready/emoji.js");
-  handling(msg, bot);
-  emoji(msg, bot);
-  if (msg.content.toLowerCase().startsWith(prefix) && !msg.channel.type) {
-    var c = msg.content.toLowerCase().substring(1).split(" ");
+  if (msg.channel.type) return; // Only Works in News Channel and Text Channels
 
-    for(i=0;i<commands.length;i++) {
-      if (c[0].toString() == commands[i][0]) {
-        let command = require(`./Commands/${commands[i][1]}`);
-        command.func(msg, bot);
+  if (msg.content.toLowerCase().startsWith(`<@!${bot.user.id}>`)) {
+    bot.hand(msg, bot);
+    if (msg.guildID === "428255713710702592") bot.emoji(msg, bot);
+  } else
+    if (msg.content.toLowerCase().startsWith(prefix)) {
+      var c = msg.content.toLowerCase().substring(prefix.length).split(" ")[0];
 
-        return;
-      }
+      if (commands[c] == undefined) return;
+      commands[c](msg, bot);
     }
-  }
 });
 
 bot.connect();
