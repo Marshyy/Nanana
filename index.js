@@ -30,7 +30,7 @@ for (i = 0; i < files.length; i++) {
 
   if (c.aliases) {
     for (j = 0; j < c.aliases.length; j++) {
-      commands[c.aliases[j].toLowerCase()] = c.func;
+      commands[c.aliases[j].toLowerCase()] = commands[files[i].slice(0, -3).toLowerCase()];
     }
   }
 }
