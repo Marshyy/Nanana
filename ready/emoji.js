@@ -1,5 +1,7 @@
 function emoji(msg, bot) {
-    let name = msg.content.toLowerCase().slice(23);
+    let n;
+    if (msg.content[2] == "!") { n = 23 } else { n = 22 }
+    let name = msg.content.toLowerCase().slice(n);
     let emojis = require("./emojis.json");
     let list = Object.keys(emojis);
 
