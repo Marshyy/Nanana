@@ -39,9 +39,11 @@ for (i = 0; i < files.length; i++) {
 bot.on('messageCreate', msg => {
   if (msg.channel.type) return; // Only Works in News Channel and Text Channels
 
-  if (msg.content.toLowerCase().startsWith(`<@!${bot.user.id}>`)) {
-    bot.hand(msg, bot);
-    if (msg.guildID === "428255713710702592") bot.emoji(msg, bot);
+  if (msg.mentions.length) {
+    if (msg.mentions[0].id == bot.user.id) {
+      bot.hand(msg, bot);
+      if (msg.guildID === "428255713710702592") bot.emoji(msg, bot);
+    }
   } else
     if (msg.content.toLowerCase().startsWith(prefix)) {
       var c = msg.content.toLowerCase().substring(prefix.length).split(" ")[0];
