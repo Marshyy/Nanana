@@ -4,13 +4,12 @@ function owofy(msg) {
 
     let tnt = msg.content.split(' ').slice(1).join(' ');
 
-    if (tnt) {
-        sfw.OwOify({text: tnt}).then(weebmsg => {
-            msg.channel.createMessage(weebmsg.owo);
-        });
-    } else {
-        return msg.channel.createMessage("Please input valid text to Weebify");
+    async function owo() {
+        let owo = await sfw.OwOify({ text: tnt });
+        msg.channel.createMessage(owo.msg);
     }
+    owo();
+
 }
 
 module.exports = {
