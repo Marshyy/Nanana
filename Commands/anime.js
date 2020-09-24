@@ -10,7 +10,7 @@ async function anime(message, bot) {
 
     let neko = await sfw.neko();
     let id = await message.channel.createMessage({
-        content: "Please Wait Until The Date Loads up, have this neko image until then",
+        content: "Please Wait Until The Data Loads up, have this neko image until then",
         embed: {
             image: {
                 url: neko.url

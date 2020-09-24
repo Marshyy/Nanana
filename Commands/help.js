@@ -33,6 +33,8 @@ function help(msg, bot) {
 
             if (!c.usage && !c.help) return msg.channel.createMessage("ERROR\nContact the Bot Owner (user id: 309311003303215108) with a Screenshot");
 
+            if (c.nsfw && !msg.channel.nsfw) return msg.channel.createMessage("Please Use this command in a NSFW Channel");
+
             let data = {
                 "embed": {
                     "author": {
@@ -77,6 +79,7 @@ function help(msg, bot) {
 
         for(i=0;i<files.length;i++) {
             let c = require(`../Commands/${files[i]}`);
+            if (c.nsfw && !msg.channel.nsfw) continue;
             if (c.help) {
                 data.embed.fields.push({ "name": charup(files[i].slice(0, -3)), "value": c.help , "inline": true});
             }
