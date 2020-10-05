@@ -76,7 +76,7 @@ async function anime(message, bot) {
 
     async function exe(num) {
         data = await Mal.getInfoFromURL(data[num].url);
-
+        
         file = {
             "content": "Here's the Data you requested",
             "embed": {
