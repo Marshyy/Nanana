@@ -6,4 +6,5 @@ A Simple Discord Bot written in Node.js (Eris)
 Change token and prefix in their respective places in index.js
 
 Bot invite Link: https://discord.com/oauth2/authorize?client_id=433582310705594368&permissions=67497040&scope=bot
+
 Bot Server Link: https://discord.gg/hGQndws
