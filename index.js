@@ -16,7 +16,7 @@ bot.on('ready', () => {
   let ready = require("./ready/ready.js");
   ready(bot);
   bot.hand = require("./ready/handling.js");
-  bot.emoji = require("./ready/emoji.js");
+  bot.extras = require("./ready/extras.js");
 })
 
 // Aliases and Commands Loading
@@ -42,7 +42,7 @@ bot.on('messageCreate', msg => {
   if (msg.mentions.length) {
     if (msg.mentions[0].id == bot.user.id) {
       bot.hand(msg, bot);
-      if (msg.guildID === "428255713710702592") bot.emoji(msg, bot);
+      if (msg.guildID === "428255713710702592") bot.extras(msg, bot);
     }
   } else
     if (msg.content.toLowerCase().startsWith(prefix)) {

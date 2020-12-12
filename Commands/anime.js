@@ -80,9 +80,9 @@ async function anime(message, bot) {
         file = {
             "content": "Here's the Data you requested",
             "embed": {
-                "title":data.title,
+                "title": data.title,
                 "description": data.synopsis,
-                "url":data.url,
+                "url": data.url,
                 "thumbnail": {
                     "url":data.thumbnail
                 },

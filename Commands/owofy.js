@@ -4,12 +4,16 @@ function owofy(msg) {
 
     let tnt = msg.content.split(' ').slice(1).join(' ');
 
-    async function owo() {
-        let owo = await sfw.OwOify({ text: tnt });
-        msg.channel.createMessage(owo.msg);
+    if (tnt.length) {
+        async function owo() {
+            let owo = await sfw.OwOify({ text: tnt });
+            console.log(owo);
+            msg.channel.createMessage(owo.owo);
+        }
+        owo();
+    } else {
+        msg.channel.createMessage("Ahhh???, Type Something after the command I guess, idk...")
     }
-    owo();
-
 }
 
 module.exports = {
