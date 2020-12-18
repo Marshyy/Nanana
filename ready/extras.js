@@ -21,7 +21,7 @@ function extras(msg, bot) {
         msg.content = msg.content.toLowerCase();
 
         if (msg.content == "list") {
-            return msg.channel.createMessage("List of All Images: " + list.join(" || "))
+            return msg.channel.createMessage("List of All Images: " + list.join(" | "))
         }
 
         if (emojis[msg.content] == undefined) return;
