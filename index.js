@@ -1,7 +1,21 @@
+/* 
+   Delete the Part from below if you are running this locally 
+*/
+const http = require('http');
+const server = http.createServer((req, res) => {
+  res.writeHead(200);
+  res.end('ok');
+});
+server.listen(3000);
+
+/*
+   Delete the Part from above if you are running this locally 
+*/
+
 const Eris = require('eris');
 const fs = require('fs');
-const token = process.env.token;
-const prefix = process.env.prefix;
+const token = process.env.token; // Your Token Goes here
+const prefix = process.env.prefix; // Your Prefix Goes here
 
 let bot = new Eris(token, {
   disableEveryone: true
@@ -39,6 +53,7 @@ for (i = 0; i < files.length; i++) {
 bot.on('messageCreate', msg => {
   if (msg.channel.type) return; // Only Works in News Channel and Text Channels
 
+  // The part below is server related, only works in the bot server, You are free to do whatever you want here
   if (msg.mentions.length) {
     if (msg.mentions[0].id == bot.user.id) {
       bot.hand(msg, bot);
@@ -54,10 +69,3 @@ bot.on('messageCreate', msg => {
 });
 
 bot.connect();
-
-const http = require('http');
-const server = http.createServer((req, res) => {
-  res.writeHead(200);
-  res.end('ok');
-});
-server.listen(3000);
