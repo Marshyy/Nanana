@@ -4,7 +4,7 @@ function ready(bot) {
     
     bot.editStatus("online", game = {
         name: `${bot.guilds.size} Guilds | Happiness is only happiness when everyone shares it.`,
-        type: 0
+        type: 3
     });
 }
 
