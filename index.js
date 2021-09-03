@@ -7,7 +7,6 @@ const server = http.createServer((req, res) => {
   res.end('ok');
 });
 server.listen(3000);
-
 /*
    Delete the Part from above if you are running this locally 
 */
