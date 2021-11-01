@@ -16,8 +16,8 @@
   "dependencies": {
     "eris": "^0.13.3",
     "fs": "0.0.2",
-    "mal-scraper": "^2.11.3",
-    "nana-api": "^1.1.4",
+    "mal-scraper": "^2.11.2",
+    "nana-api": "^1.1.2",
     "nekos.life": "^2.0.7"
   }
 }
