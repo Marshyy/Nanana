@@ -76,12 +76,12 @@ async function anime(message, bot) {
 
     async function exe(num) {
         data = await Mal.getInfoFromURL(data[num].url);
-        
+
         file = {
             "content": "Here's the Data you requested",
             "embed": {
                 "title": data.title,
-                "description": data.synopsis,
+                "description": data.synopsis || "No Synopsis Specified",
                 "url": data.url,
                 "thumbnail": {
                     "url":data.thumbnail
@@ -100,47 +100,47 @@ async function anime(message, bot) {
                     },
                     {
                         "name": "Episodes",
-                        "value": data.episodes,
+                        "value": data.episodes || "No Episodes Specifed",
                         "inline": true
                     },
                     {
                         "name": "Status",
-                        "value": data.status,
+                        "value": data.status || "Status Not Specifed",
                         "inline": true
                     },
                     {
                         "name": "Aired",
-                        "value": data.aired,
+                        "value": data.aired || "No Dates Specified",
                         "inline": true
                     },
                     {
                         "name": "Producers",
-                        "value": data.producers.join(" "),
+                        "value": data.producers.join(" ") || "No Producers Specifed",
                         "inline": true
                     },
                     {
                         "name": "Studios",
-                        "value": data.studios.join(" "),
+                        "value": data.studios.join(" ") || "No Studios Specifed",
                         "inline": true
                     },
                     {
                         "name": "Genre's",
-                        "value": data.genres.join("\n"),
+                        "value": data.genres.join("\n") || "No Genre's Specified",
                         "inline": true
                     },
                     {
                         "name": "Source",
-                        "value": data.source,
+                        "value": data.source || "No Sources Specifed",
                         "inline": true
                     },
                     {
                         "name": "Rating",
-                        "value": data.rating,
+                        "value": data.rating || "None",
                         "inline": true
                     },
                     {
                         "name": "Score",
-                        "value": data.score,
+                        "value": data.score || "N/A",
                         "inline": true
                     }
                 ]
