@@ -5,7 +5,6 @@ function extras(msg, bot) {
     msg.content = msg.content.slice(n); // Arg = "@mention Text abc" returns "Text abc"
 
     if (msg.content.split(' ')[0].toLowerCase() == "say") { // Say Section
-
         msg.content = msg.content.slice(4);
 
         if (msg.content) {
@@ -13,26 +12,6 @@ function extras(msg, bot) {
         } else {
             msg.channel.createMessage("Why, Just Why??");
         }
-
-    } else { // Emoji Section
-        
-        let emojis = require("./emojis.json");
-        let list = Object.keys(emojis);
-        msg.content = msg.content.toLowerCase();
-
-        if (msg.content == "list") {
-            return msg.channel.createMessage("List of All Images: " + list.join(" | "))
-        }
-
-        if (emojis[msg.content] == undefined) return;
-
-        msg.channel.createMessage({
-            embed: {
-                image: {
-                    url: emojis[msg.content]
-                }
-            }
-        })
     }
 }
 
