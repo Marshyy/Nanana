@@ -14,57 +14,48 @@ server.listen(3000);
 const Eris = require('eris');
 const fs = require('fs');
 const token = process.env.token; // Your Token Goes here
-const prefix = process.env.prefix; // Your Prefix Goes here
 
-let bot = new Eris(token, {
-  disableEveryone: true
+let bot = new Eris.CommandClient(token, { allowedMentions: { everyone: false } }, { 
+  defaultHelpCommand: false,
+  ignoreBots: true,
+  ignoreSelf: true,
+  name: "Nanana",
+  owner: "Marshyy",
+  prefix: "@mention "
 });
-
-bot.prefix = prefix;
-
-let files = fs.readdirSync('./Commands/');
 
 // Ready Event
-bot.on('ready', () => {
-  let ready = require("./ready/ready.js");
-  ready(bot);
-  bot.hand = require("./ready/handling.js");
-  bot.extras = require("./ready/extras.js");
-})
+bot.on('ready', async () => {
+  console.log(`Ready as ${bot.user.username}`);
+  console.log(`Ready with ${bot.guilds.size} guilds`);
+  quotes = ["I won’t lose to my own decisions, no matter what. That’s the proof that I’m me.", "Everyone wants to have someone else's attention, and to be noticed. But the same thing goes for the other person too.", "Happiness is only happiness when everyone shares it."]
+  random = Math.floor(Math.random() * quotes.length);  
 
-// Aliases and Commands Loading
-let i, j;
-let commands = {}; // Object Created to Store Name And Aliases And their respective funtions
+  bot.editStatus("online", {
+    name: `${bot.guilds.size} Guilds |  ${quotes[random]}`,
+    type: 3
+  });
 
-for (i = 0; i < files.length; i++) {
-  let c = require(`./Commands/${files[i]}`);
+  // Aliases and Commands Loading
+  let i, files = fs.readdirSync('./Commands/');
+  let commands = await bot.getCommands();
 
-  commands[files[i].slice(0, -3).toLowerCase()] = c.func;
-
-  if (c.aliases) {
-    for (j = 0; j < c.aliases.length; j++) {
-      commands[c.aliases[j].toLowerCase()] = commands[files[i].slice(0, -3).toLowerCase()];
+  if (commands.length == files.length) { 
+    // If Command is updated but nothing new is added, This won't update it, but that doesn't matter for the time being tho
+    for (i = 0; i < files.length; i++) {
+      let c = require(`./Commands/${files[i]}`);
+      bot.createCommand(c, c.type);
     }
   }
-}
+})
 
-// Message Create Event, Handling Event 
-bot.on('messageCreate', msg => {
-  if (msg.channel.type) return; // Only Works in News Channel and Text Channels
+bot.on("error", err => console.error(err))
 
-  // The part below is server related, only works in the bot server, You are free to do whatever you want here
-  if (msg.mentions.length) {
-    if (msg.mentions[0].id == bot.user.id) {
-      bot.hand(msg, bot);
-      if (msg.guildID === "428255713710702592") bot.extras(msg, bot);
-    }
-  } else
-    if (msg.content.toLowerCase().startsWith(prefix)) {
-      var c = msg.content.toLowerCase().substring(prefix.length).split(" ")[0];
-
-      if (commands[c] == undefined) return;
-      commands[c](msg, bot);
-    }
-});
+bot.on("interactionCreate", (interaction) => {
+  if (interaction instanceof Eris.CommandInteraction) {
+    let c = require(`./Commands/${interaction.data.name}.js`);
+    c.func(interaction, bot);
+  }
+})
 
 bot.connect();

@@ -1,26 +1,28 @@
-function neko(msg) {
+function neko(interaction) {
     const client = require('nekos.life');
-    const { sfw } = new client();
-
-    sfw.neko().then(url => {
-        const u = url.url;
-
-        const data = {
+    const neko = new client();
+    
+    neko.sfw.neko().then(u => {
+        let data = {
             "embed": {
                 "title": "Click for url",
-                "url": u, 
+                "url": u.url, 
                 "image": {
-                    "url": u
-                  }
+                    "url": u.url
+                },
+                "footer": {
+                    "text": "Powered by Nekos.life"
+                }
             }
-        };
-        
-        msg.channel.createMessage(data);
+        }
+    
+        interaction.createMessage(data);
     })
 }
 
 module.exports = {
-    func: neko,
-    help: "Posts an Random Image of a Neko",
-    usage: "Neko"
+    name: "neko",
+    description: "Posts an Random Image of a Neko",
+    type: 1,
+    func: neko
 }
