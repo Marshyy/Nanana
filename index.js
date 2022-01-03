@@ -1,16 +1,3 @@
-/* 
-   Delete the Part from below if you are running this locally 
-*/
-const http = require('http');
-const server = http.createServer((req, res) => {
-  res.writeHead(200);
-  res.end('ok');
-});
-server.listen(3000);
-/*
-   Delete the Part from above if you are running this locally 
-*/
-
 const Eris = require('eris');
 const fs = require('fs');
 const token = process.env.token; // Your Token Goes here
