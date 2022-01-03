@@ -40,13 +40,11 @@ bot.on('ready', async () => {
   let i, files = fs.readdirSync('./Commands/');
   let commands = await bot.getCommands();
 
-  if (commands.length == files.length) { 
-    // If Command is updated but nothing new is added, This won't update it, but that doesn't matter for the time being tho
-    for (i = 0; i < files.length; i++) {
-      let c = require(`./Commands/${files[i]}`);
-      bot.createCommand(c, c.type);
-    }
+  for (i = 0; i < files.length; i++) {
+    let c = require(`./Commands/${files[i]}`);
+    bot.createCommand(c, c.type);
   }
+  
 })
 
 bot.on("error", err => console.error(err))
