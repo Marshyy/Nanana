@@ -8,7 +8,7 @@ async function anime(interaction, bot) {
 
     // Checks whether the type of channel is nsfw or not, if not nsfw, deletes the objects which have nsfw data in them
     if (interaction.channel.nsfw == 0) {
-        data = data.filter(data => { if (data.rating != "Rx") return data; })
+        data = data.filter(data => { if (data.rating != "Rx" || data.rating != "Rx - Hentai") return data; })
     }
 
     if (!data.length) { return interaction.createMessage("Cannot find any anime"); }
